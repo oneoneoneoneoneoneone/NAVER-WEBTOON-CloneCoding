@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>쿠키받아가</string>
+		<key>description</key>
+		<string></string>
+		<key>category</key>
+		<string>광고</string>
+		<key>imageName</key>
+		<string>house</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>추천함니다</string>
+		<key>description</key>
+		<string></string>
+		<key>category</key>
+		<string>신작</string>
+		<key>imageName</key>
+		<string>book</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string></string>
+		<key>description</key>
+		<string></string>
+		<key>category</key>
+		<string></string>
+		<key>imageName</key>
+		<string></string>
+	</dict>
+</array>
+</plist>
