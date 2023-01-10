@@ -33,7 +33,7 @@ class WebViewController: UIViewController{
         //웹 뷰에 대한 기본 속성
         let preferences = WKPreferences() //WKWebpagePreferences
 //        preferences.allowsContentJavaScript = true
-        preferences.javaScriptEnabled = true
+//        preferences.javaScriptEnabled = true
         preferences.javaScriptCanOpenWindowsAutomatically = true
         
         //웹 뷰와 javaScript 간의 상호작용을 관리
