@@ -70,11 +70,12 @@ class MainNavigationView: UINavigationController{
         leftButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cookieButtonTap)))
         rightButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchButtonTap)))
         
-//        var navigationBarAppearance = UINavigationBarAppearance()
-//        navigationBarAppearance.backgroundColor = .white
-//        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .regular)]
+        var navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = .systemBackground
+        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .regular)]
+        navigationBarAppearance.largeTitleTextAttributes =  [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .regular)]
 //        
-//        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         self.navigationBar.isTranslucent = true
         
 //        self.navigationItem.hidesSearchBarWhenScrolling = false

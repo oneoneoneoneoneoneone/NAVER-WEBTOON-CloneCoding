@@ -157,12 +157,12 @@ class BestViewController: UIViewController {
         topCollectionView.snp.makeConstraints{
             $0.top.equalTo(topLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(160)
+            $0.height.equalTo(view.frame.height/5)
         }
         
         categoryCollectionView.snp.makeConstraints{
             //$0.edges.equalToSuperview()
-            $0.top.equalTo(topCollectionView.snp.bottom)
+            $0.top.equalTo(topCollectionView.snp.bottom).offset(1)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(45)
         }

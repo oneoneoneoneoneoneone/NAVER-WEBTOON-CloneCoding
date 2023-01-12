@@ -14,9 +14,9 @@ class MainViewController: UIViewController {
     final var statusBarMargin: CGFloat = 22.0
     final var sortStandard = ["인기순", "업데이트순", "별점순"]
     final var days = ["신작", "월", "화", "수", "목", "금", "토", "일", "매일+", "완결"]
-    final var bannars = [Bannar(title: "최고의 작품 추천합니다.", description: "지금보러가기", category: "웹툰", imageName: "figure.wave"),
-               Bannar(title: "최고의 작품 추천바랍니다.", description: "설명", category: "투표", imageName: "flag.2.crossed"),
-               Bannar(title: "쿠키를 충전하십시오", description: "설명", category: "광고", imageName: "fuelpump.fill")]
+    final var bannars = [Bannar(title: "최고의 작품 추천합니다.", description: "지금보러가기", category: "웹툰", imageName: "book_banner3"),
+               Bannar(title: "최고의 작품 추천바랍니다.", description: "설명", category: "투표", imageName: "book_banner4"),
+               Bannar(title: "쿠키를 충전하십시오", description: "설명", category: "광고", imageName: "book_banner5")]
     
     var user: User?
     var contents: [Content] = []
@@ -315,6 +315,18 @@ extension MainViewController{
         }
     }
 
+    private func setNavigation(){
+
+//        let navigationBarAppearance = UINavigationBarAppearance()
+//        navigationBarAppearance.backgroundColor = .systemBackground
+//        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .light)]
+
+//        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        self.navigationItem.titleView = centerView
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     private func setData(standard: Int){
         var items = Const.Util.getItemsData()
 
@@ -339,18 +351,6 @@ extension MainViewController{
 
             contents.append(Content(day: day, data: calenderContent))
         }
-    }
-
-    private func setNavigation(){
-
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = .systemBackground
-        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .light)]
-
-        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-        self.navigationItem.titleView = centerView
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     // viewDidLoad에서 호출
@@ -395,9 +395,14 @@ extension MainViewController{
 
         if pageViewController == dayPageViewController{
             if oldValue == newValue{
+                dayPageViewController.setViewControllers(
+                    [dayPages[dayCurrentPage]],
+                    direction: direction,
+                    animated: animated,
+                    completion: nil)
+                
                 return
             }
-            
             let count = dayPages[dayCurrentPage].contents.first?.contentItem.count ?? 0
             
             if count > 0{
@@ -411,9 +416,8 @@ extension MainViewController{
                 [dayPages[dayCurrentPage]],
                 direction: direction,
                 animated: animated,
-                completion: nil
-            )
-            
+                completion: nil)
+                        
             // pageViewController에서 paging한 경우
             dayCollectionView.selectItem(
                 at: IndexPath(item: dayCurrentPage, section: 0), animated: animated, scrollPosition: .centeredHorizontally)
@@ -423,7 +427,6 @@ extension MainViewController{
             }
 //            dayPages[oldValue].oldLoad()
 //            dayPages[newValue].newLoad()
-            self.dayPages[self.dayCurrentPage].reload()
         }
     }
 
@@ -514,6 +517,9 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == topCollectionView{
+            return
+        }
         self.didTapCell(at: indexPath)
     }
 }

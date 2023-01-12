@@ -13,6 +13,8 @@ class EndCollectionViewHorizontalCell: UICollectionViewCell{
         let imageView = UIImageView()
         imageView.image = UIImage(systemName:"questionmark")
         imageView.layer.cornerRadius = 5
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()

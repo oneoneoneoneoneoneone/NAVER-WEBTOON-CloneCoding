@@ -24,7 +24,6 @@ class MainDayPageViewController: UIViewController{
         //스크롤뷰안에 콜렉션뷰가 들어가기 때문에 콜렉션뷰 스크롤 방지
         collectionView.isScrollEnabled = false
 
-        collectionView.register(HeaderCollectionViewCell.self, forCellWithReuseIdentifier: "HeaderCollectionViewCell")
         collectionView.register(BasicCollectionViewCell.self, forCellWithReuseIdentifier: "BasicCollectionViewCell")
         collectionView.register(AiCollectionViewCell.self, forCellWithReuseIdentifier: "AiCollectionViewCell")
         collectionView.register(RankCollectionViewCell.self, forCellWithReuseIdentifier: "RankCollectionViewCell")
@@ -73,13 +72,6 @@ class MainDayPageViewController: UIViewController{
 //            self.navigationController?.setNavigationBarHidden(false, animated: false)
 ////                        NotificationCenter.default.post(name: NSNotification.Name("scrollPage"), object: nil)
 //        }
-    }
-    
-    public func reload(){
-        DispatchQueue.main.async {
-            super.reloadInputViews()
-            self.collectionView.reloadData()// reloadData()// reloadData()
-        }
     }
 }
 
@@ -130,7 +122,7 @@ extension MainDayPageViewController{
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(itemFractionalWidthFraction), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: itemInset, bottom: 0, trailing: itemInset)
+        item.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset, bottom: itemInset, trailing: itemInset)
 
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(basicCellHieght))//groupFractionalHeightFraction))

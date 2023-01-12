@@ -14,6 +14,7 @@ class BestPageViewController: UIViewController{
 
     lazy var settingView: BestSettingView = {
         let view = BestSettingView()
+                        
         view.updateSortButton.addTarget(self, action: #selector(sortButtonTap), for: .touchUpInside)
         view.viewSortButton.addTarget(self, action: #selector(sortButtonTap), for: .touchUpInside)
         view.scoreSortButton.addTarget(self, action: #selector(sortButtonTap), for: .touchUpInside)
@@ -65,7 +66,7 @@ class BestPageViewController: UIViewController{
     
     func setLayout(){
         
-        [settingView, collectionView].forEach{
+        [collectionView, settingView].forEach{
             view.addSubview($0)
         }
         

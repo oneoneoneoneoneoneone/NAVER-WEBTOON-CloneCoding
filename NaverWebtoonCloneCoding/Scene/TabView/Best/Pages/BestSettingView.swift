@@ -60,7 +60,6 @@ class BestSettingView: UIView{
         layer.shadowOffset = CGSize(width: 0, height: 0.5) //위치이동 - 아래로 2 이동
         clipsToBounds = false    //서브뷰(cell)가 경계를 넘어가도 잘리지 않게
         
-        
         setLayout()
     }
     

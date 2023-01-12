@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 
 struct Const{
+    struct Color{
+        static func setColor(color: UIColor) -> UIColor{
+            let r: CGFloat = color.cgColor.components![0], g: CGFloat = color.cgColor.components![1], b: CGFloat = color.cgColor.components![2]
+            return UIColor(red: (1 - r), green: (1 - g), blue: (1 - b), alpha: 1)
+        }
+    }
+    
     struct Size{
         static var HeaderMaxHeight: CGFloat = 64.0
         static var HeaderMinHeight: CGFloat = 20.0
@@ -56,7 +63,7 @@ struct Const{
             }
         }
     }
-    
+        
     struct Number{
         static func setIntToString(number: Int) -> String{
             let numberFormatter = NumberFormatter()

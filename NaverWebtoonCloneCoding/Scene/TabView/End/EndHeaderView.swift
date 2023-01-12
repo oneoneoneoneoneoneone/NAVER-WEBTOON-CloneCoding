@@ -98,8 +98,12 @@ class EndHeaderView: UIView{//UICollectionReusableView{
 extension EndHeaderView: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
-
+        if collectionView == topCollectionView{
+            return 6
+        }
+        else{
+            return items.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -124,6 +128,7 @@ extension EndHeaderView: UICollectionViewDelegateFlowLayout, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == topCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EndCollectionViewTopCell", for: indexPath) as? EndCollectionViewTopCell
+            cell?.setImage(image: "book_banner\(indexPath.row + 1)")
             
             return cell ?? UICollectionViewCell()
         }

@@ -12,12 +12,10 @@ class MainTopPageViewController: UICollectionViewCell{//UIViewController{
     var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName:"house")
-        imageView.tintColor = .white
-        imageView.backgroundColor = .blue
-//        imageView.sizeToFit()
 
         return imageView
     }()
+    
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -32,6 +30,7 @@ class MainTopPageViewController: UICollectionViewCell{//UIViewController{
         
         return stackView
     }()
+    
     var categoryLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -44,6 +43,7 @@ class MainTopPageViewController: UICollectionViewCell{//UIViewController{
         
         return label
     }()
+    
     var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -93,7 +93,7 @@ class MainTopPageViewController: UICollectionViewCell{//UIViewController{
     }
     
     func setData(bannar: Bannar){
-        imageView.image = UIImage(systemName: bannar.imageName)
+        imageView.image = UIImage(named: bannar.imageName)
         categoryLabel.text = bannar.category
         titleLabel.text = bannar.title
     }

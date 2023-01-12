@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class DetailViewController: UIViewController{
     var isbn: String?
@@ -61,7 +62,6 @@ class DetailViewController: UIViewController{
     //tableViewHeader
     lazy var headerView: UIView = {
         var headerView = UIView()
-        headerView.layer.backgroundColor = UIColor.systemBackground.cgColor
         headerView.layer.shadowPath = nil
         headerView.layer.shadowColor = UIColor.systemGray.cgColor
         headerView.layer.shadowRadius = 0.5  //반지름 - 범위?
@@ -71,10 +71,19 @@ class DetailViewController: UIViewController{
         
         return headerView
     }()
+    let backgroundView: UIView = {
+        var imageView = UIView()
+        imageView.backgroundColor = .systemBlue
+        
+        return imageView
+    }()
     let imageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(systemName:"questionmark")
         imageView.layer.cornerRadius = 5
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+//        imageView.layer.zPosition = 1
         
         return imageView
     }()
@@ -183,25 +192,26 @@ class DetailViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.backItem?.backButtonTitle = ""
+//        self.navigationController?.navigationBar.backItem?.backButtonTitle = ""
+//        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "")
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.backItem?.backButtonTitle = ""
+//        self.navigationController?.navigationBar.backItem?.backButtonTitle = ""
+//        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if self.navigationController?.visibleViewController is SearchViewController || self.navigationController?.visibleViewController is WebViewController {
+            return
         }
-        else{
-            self.navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.navigationBar.backItem?.backButtonTitle = ""
-            
-        }
+        
+        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.navigationBar.backItem?.backBarButtonItem = UIBarButtonItem(title: "")
     }
         
     func setData(){
@@ -212,7 +222,6 @@ class DetailViewController: UIViewController{
         
         if detailItem == nil {
             let detailData = Const.Util.getDetailData(day: item!.updateDay).sorted(by: {$1.uploadDate<$0.uploadDate})
-//            let detailData = Const.Util.getDetailDataListData().randomElement()!.sorted(by: {$1.uploadDate<$0.uploadDate})
             detailItem = DetailItems(isbn: item!.isbn, title: item!.title, detailData: detailData)
             
             let recentUploadDate =  detailData.filter{$0.uploadDate <= Date.now}.first?.uploadDate
@@ -221,6 +230,8 @@ class DetailViewController: UIViewController{
             Const.Util.setDetailItemsData(data: detailItem!)
             Const.Util.setItemData(data: item!)
         }
+        
+        closedCellQuantity = (detailItem?.detailData.filter{$0.uploadDate > Date.now}.count)!
         
         let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn})
         rightLikeButton.setImage(UIImage(systemName: idx == nil ? "plus.circle" : "checkmark.circle.fill"), for: .normal)
@@ -235,64 +246,62 @@ class DetailViewController: UIViewController{
             }
         }
         
-        closedCellQuantity = (detailItem?.detailData.filter{$0.uploadDate > Date.now}.count)!
                 
         imageView.kf.setImage(with: URL(string: item!.image))
+        backgroundView.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0))
+        likeLabel.layer.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0)).cgColor
+        likeLabel.textColor = Const.Color.setColor(color: UIColor(cgColor: likeLabel.layer.backgroundColor!))
         likeLabel.text = "+ 관심 \(Const.Number.setIntToString(number: item!.like))"
         titleLabel.text = item!.title
         authorLabel.text = "\(item!.author)>"
         updateDayLabel.text = " \(item!.updateDay)요웹툰"
         descriptionLabel.text = item!.description
         publisherLabel.text = "#\(item!.publisher)"
-        
     }
     
     func setNavigation(){
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(systemName: "house"), for: .bottom, barMetrics: .default)
+//        self.navigationController?.isNavigationBarHidden = false
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(systemName: "house"), for: .bottom, barMetrics: .default)
         
         self.navigationItem.rightBarButtonItems = [rightAlartButton, UIBarButtonItem(customView: rightLikeButton)]
         self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationController?.navigationBar.backItem?.backBarButtonItem = UIBarButtonItem(title: "")
         
 //        rightLikeButton.target = self
         rightAlartButton.target = self
         rightAlarmButton.target = self
-        
 //
 //
-        //self.title = "aa"
-//        self.navigationController?.navigationItem.largeTitleDisplayMode = .always
-//        self.navigationItem.largeTitleDisplayMode = .always
-        
-        
+//
+//        var navigationBarAppearance = UINavigationBarAppearance()
+//        navigationBarAppearance.backgroundImage = imageView.image//.backgroundColor = .systemBlue
+//        navigationBarAppearance.backgroundImageContentMode = .scaleAspectFill
+//        navigationController?.navigationBar.clipsToBounds = true
+////
+//        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
 //        navigationController?.navigationBar.prefersLargeTitles = true
-//
-//        self.navigationController?.navigationBar.barTintColor = .brown
-        
-        //self.navigationController?.navigationBar.barTintColor = .red
-        //navigationController?.navigationBar.shadowImage = UIImage(systemName: "house")
-        
-        //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //navigationController?.navigationBar.shadowImage = UIImage()
-        
-        //self.navigationController?.navigationBar.barPosition = .bottom
-//        rightAlartButotn.target = self
-//        rightAlartButotn.action = #selector(DetailViewController.showActionSheetAlert)
-//        rightLikeButotn.action = #selector(DetailViewController.addLike)
+
+//        navigationController?.navigationBar.layer.zPosition = 3
     }
     
     func setLayout(){
         view.addSubview(tableView)
 
-        [imageView, likeLabel, titleLabel, authorLabel, updateDayLabel, iconLabel, descriptionLabel, publisherLabel].forEach{
+        [backgroundView, imageView, likeLabel, titleLabel, authorLabel, updateDayLabel, iconLabel, descriptionLabel, publisherLabel].forEach{
             headerView.addSubview($0)
         }
         
+        backgroundView.snp.makeConstraints{
+            $0.top.equalToSuperview().inset(-90)//.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(180)
+        }
         imageView.snp.makeConstraints{
-            $0.top.equalToSuperview()//.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(10)
-            $0.height.equalTo(140)
+            $0.top.equalToSuperview().inset(-90)//.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview().inset(40)
+            $0.height.equalTo(240)
         }
         likeLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
@@ -300,11 +309,11 @@ class DetailViewController: UIViewController{
         }
         titleLabel.snp.makeConstraints{
             $0.top.equalTo(imageView.snp.bottom).offset(5)
-            $0.leading.equalTo(imageView)
+            $0.leading.equalToSuperview().inset(10)
         }
         authorLabel.snp.makeConstraints{
             $0.top.equalTo(titleLabel.snp.bottom).offset(5)
-            $0.leading.equalTo(imageView)
+            $0.leading.equalTo(titleLabel)
         }
         updateDayLabel.snp.makeConstraints{
             $0.top.equalTo(authorLabel)
@@ -312,17 +321,17 @@ class DetailViewController: UIViewController{
         }
         iconLabel.snp.makeConstraints{
             $0.top.equalTo(authorLabel.snp.bottom).offset(5)
-            $0.trailing.equalTo(imageView)
+            $0.trailing.equalToSuperview().inset(10)
             $0.width.equalTo(18)
         }
         descriptionLabel.snp.makeConstraints{
             $0.top.equalTo(authorLabel.snp.bottom).offset(5)
-            $0.leading.equalTo(imageView)
+            $0.leading.equalTo(titleLabel)
             $0.trailing.equalTo(iconLabel.snp.leading)
         }
         publisherLabel.snp.makeConstraints{
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(5)
-            $0.leading.equalTo(imageView)
+            $0.leading.equalTo(titleLabel)
         }
         
         tableView.snp.makeConstraints{
@@ -517,11 +526,11 @@ extension DetailViewController: UIScrollViewDelegate{
 
         if headerConstant > 90  {
 //            self.navigationController?.navigationBar.backItem?.title = String(titleLabel.text!.dropLast(titleLabel.text!.count > 15 ? titleLabel.text!.count - 15 : 0))
-            self.navigationController?.navigationBar.backItem?.backButtonTitle = String(titleLabel.text!.dropLast(titleLabel.text!.count > 17 ? titleLabel.text!.count - 17 : 0))
+//            backItem.title = String(titleLabel.text!.dropLast(titleLabel.text!.count > 17 ? titleLabel.text!.count - 17 : 0))
+            self.navigationController?.navigationBar.backItem?.backBarButtonItem = UIBarButtonItem(title: titleLabel.text)
         }
         else{
-//            self.navigationController?.navigationBar.backItem?.title = ""
-            self.navigationController?.navigationBar.backItem?.backButtonTitle = ""
+            self.navigationController?.navigationBar.backItem?.backBarButtonItem = UIBarButtonItem(title: "")
         }
     }
 }

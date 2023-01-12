@@ -29,4 +29,8 @@ class EndCollectionViewTopCell: UICollectionViewCell{
             $0.edges.equalToSuperview()
         }
     }
+    
+    func setImage(image: String){
+        imageView.image = UIImage(named: image)
+    }
 }

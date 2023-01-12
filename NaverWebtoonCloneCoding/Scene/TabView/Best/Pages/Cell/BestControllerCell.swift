@@ -13,7 +13,8 @@ class BestControllerCell: UICollectionViewCell{
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName:"questionmark")
-        imageView.layer.borderWidth = 1
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()

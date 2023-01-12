@@ -139,7 +139,7 @@ extension MyViewController{
     private func setNavigation(){
         navigationController?.isNavigationBarHidden = false
         
-        var navigationBarAppearance = UINavigationBarAppearance()
+        let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.backgroundColor = .systemBackground
         navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .regular)]
         

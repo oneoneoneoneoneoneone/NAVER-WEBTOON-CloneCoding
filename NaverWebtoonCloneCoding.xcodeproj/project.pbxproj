@@ -60,7 +60,6 @@
 		33F76869296AC92600875E06 /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76843296AC92600875E06 /* BasicCollectionViewCell.swift */; };
 		33F7686A296AC92600875E06 /* UpdateCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76844296AC92600875E06 /* UpdateCollectionViewHeader.swift */; };
 		33F7686B296AC92600875E06 /* RankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76845296AC92600875E06 /* RankCollectionViewCell.swift */; };
-		33F7686C296AC92600875E06 /* HeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76846296AC92600875E06 /* HeaderViewCell.swift */; };
 		33F7686D296AC92600875E06 /* AiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76847296AC92600875E06 /* AiCollectionViewCell.swift */; };
 		33F7686E296AC92600875E06 /* AiCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76848296AC92600875E06 /* AiCollectionViewHeader.swift */; };
 		33F7686F296AC92600875E06 /* UpdateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76849296AC92600875E06 /* UpdateCollectionViewCell.swift */; };
@@ -76,6 +75,7 @@
 		33F7687F296C7E6500875E06 /* BestSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F7687E296C7E6500875E06 /* BestSettingView.swift */; };
 		33F76882296DB8ED00875E06 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F76881296DB8ED00875E06 /* WebKit.framework */; };
 		33F76884296DBA3B00875E06 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76883296DBA3B00875E06 /* WebViewController.swift */; };
+		33F76886296F97B900875E06 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76885296F97B900875E06 /* UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,7 +131,6 @@
 		33F76843296AC92600875E06 /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
 		33F76844296AC92600875E06 /* UpdateCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCollectionViewHeader.swift; sourceTree = "<group>"; };
 		33F76845296AC92600875E06 /* RankCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankCollectionViewCell.swift; sourceTree = "<group>"; };
-		33F76846296AC92600875E06 /* HeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewCell.swift; sourceTree = "<group>"; };
 		33F76847296AC92600875E06 /* AiCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AiCollectionViewCell.swift; sourceTree = "<group>"; };
 		33F76848296AC92600875E06 /* AiCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AiCollectionViewHeader.swift; sourceTree = "<group>"; };
 		33F76849296AC92600875E06 /* UpdateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -147,6 +146,7 @@
 		33F7687E296C7E6500875E06 /* BestSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSettingView.swift; sourceTree = "<group>"; };
 		33F76881296DB8ED00875E06 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		33F76883296DBA3B00875E06 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		33F76885296F97B900875E06 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +263,7 @@
 				33D6FA622968056400F02AE5 /* Stepper.swift */,
 				33D6FA632968056400F02AE5 /* CustomCollectionViewFlowLayout.swift */,
 				33D6FA642968056400F02AE5 /* MainNavigationView.swift */,
+				33F76885296F97B900875E06 /* UIImage.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -271,7 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				33D6FA672968056400F02AE5 /* BestViewController.swift */,
-				33F7687E296C7E6500875E06 /* BestSettingView.swift */,
 				33D6FA682968056400F02AE5 /* Cell */,
 				33D6FA6A2968056400F02AE5 /* Pages */,
 			);
@@ -290,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				33D6FA6B2968056400F02AE5 /* BestPageViewController.swift */,
+				33F7687E296C7E6500875E06 /* BestSettingView.swift */,
 				33D6FA6C2968056400F02AE5 /* Cell */,
 			);
 			path = Pages;
@@ -421,7 +422,6 @@
 				33F76847296AC92600875E06 /* AiCollectionViewCell.swift */,
 				33F76848296AC92600875E06 /* AiCollectionViewHeader.swift */,
 				33F76843296AC92600875E06 /* BasicCollectionViewCell.swift */,
-				33F76846296AC92600875E06 /* HeaderViewCell.swift */,
 				33F76845296AC92600875E06 /* RankCollectionViewCell.swift */,
 				33F76849296AC92600875E06 /* UpdateCollectionViewCell.swift */,
 				33F76844296AC92600875E06 /* UpdateCollectionViewHeader.swift */,
@@ -592,7 +592,6 @@
 				33F76863296AC92600875E06 /* MainViewController.swift in Sources */,
 				33F7685F296AC92600875E06 /* MyEditTableViewController.swift in Sources */,
 				33D6FA36296804AE00F02AE5 /* AppDelegate.swift in Sources */,
-				33F7686C296AC92600875E06 /* HeaderViewCell.swift in Sources */,
 				33F76878296AC92600875E06 /* EndCollectionViewHorizontalCell.swift in Sources */,
 				33D6FAED2968056400F02AE5 /* LocalNetwork.swift in Sources */,
 				33F7687A296AC92600875E06 /* EndTableViewVerticalCell.swift in Sources */,
@@ -603,6 +602,7 @@
 				33F76873296AC92600875E06 /* EndViewController.swift in Sources */,
 				33D6FABC2968056400F02AE5 /* PaddingLabel.swift in Sources */,
 				33D6FAD02968056400F02AE5 /* ResultTableViewHeader.swift in Sources */,
+				33F76886296F97B900875E06 /* UIImage.swift in Sources */,
 				33F7686A296AC92600875E06 /* UpdateCollectionViewHeader.swift in Sources */,
 				33D6FAAE2968056400F02AE5 /* User.swift in Sources */,
 				33D6FAB12968056400F02AE5 /* Books.swift in Sources */,

@@ -12,6 +12,8 @@ class EndTableViewVerticalCell: UITableViewCell{
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName:"questionmark")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -66,7 +68,7 @@ class EndTableViewVerticalCell: UITableViewCell{
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 5
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
-        clipsToBounds = true
+        contentView.clipsToBounds = true
         
         setLayout()
     }

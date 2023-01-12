@@ -15,8 +15,9 @@ class TopCollectionViewCell: UICollectionViewCell{
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName:"questionmark")
-        imageView.layer.borderWidth = 1
         imageView.layer.cornerRadius = 5
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -60,7 +61,7 @@ class TopCollectionViewCell: UICollectionViewCell{
         
         imageView.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(frame.height*1/2)
+            $0.height.equalTo(frame.height*3/5)
             //$0.width.equalTo(frame.height/3)
         }
         
