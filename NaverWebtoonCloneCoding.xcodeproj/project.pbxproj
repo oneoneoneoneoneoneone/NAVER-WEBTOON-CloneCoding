@@ -168,6 +168,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3373C5CA29A6899500E5758A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				3373C5C429A67A5400E5758A /* APIKey.swift */,
+				33D6FA4D2968056400F02AE5 /* Const.swift */,
+				3373C5C629A6859200E5758A /* Repository.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		33D6FA29296804AE00F02AE5 = {
 			isa = PBXGroup;
 			children = (
@@ -188,9 +198,7 @@
 		33D6FA34296804AE00F02AE5 /* NaverWebtoonCloneCoding */ = {
 			isa = PBXGroup;
 			children = (
-				33D6FA4D2968056400F02AE5 /* Const.swift */,
-				3373C5C629A6859200E5758A /* Repository.swift */,
-				3373C5C429A67A5400E5758A /* APIKey.swift */,
+				3373C5CA29A6899500E5758A /* Util */,
 				33D6FA4E2968056400F02AE5 /* Entities */,
 				33D6FAA72968056400F02AE5 /* Network */,
 				33D6FA492968056400F02AE5 /* plist */,
