@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3373C5C529A67A5400E5758A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C5C429A67A5400E5758A /* APIKey.swift */; };
 		33D6FA36296804AE00F02AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6FA35296804AE00F02AE5 /* AppDelegate.swift */; };
 		33D6FA38296804AE00F02AE5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6FA37296804AE00F02AE5 /* SceneDelegate.swift */; };
 		33D6FA3F296804AF00F02AE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6FA3E296804AF00F02AE5 /* Assets.xcassets */; };
@@ -45,7 +46,6 @@
 		33D6FAED2968056400F02AE5 /* LocalNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6FAA92968056400F02AE5 /* LocalNetwork.swift */; };
 		33D6FAF02968058100F02AE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33D6FAEF2968058100F02AE5 /* Kingfisher */; };
 		33D6FAF32968059200F02AE5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 33D6FAF22968059200F02AE5 /* SnapKit */; };
-		33D6FAF629680ABE00F02AE5 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 33D6FAF529680ABE00F02AE5 /* ScalingHeaderScrollView */; };
 		33F7685C296AC92600875E06 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F7682D296AC92600875E06 /* AddViewController.swift */; };
 		33F7685D296AC92600875E06 /* menuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F7682F296AC92600875E06 /* menuCollectionViewCell.swift */; };
 		33F7685E296AC92600875E06 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F76831296AC92600875E06 /* MyViewController.swift */; };
@@ -79,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3373C5C429A67A5400E5758A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		33D6FA32296804AE00F02AE5 /* NaverWebtoonCloneCoding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaverWebtoonCloneCoding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6FA35296804AE00F02AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33D6FA37296804AE00F02AE5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,7 +158,6 @@
 				33F76882296DB8ED00875E06 /* WebKit.framework in Frameworks */,
 				33D6FAF02968058100F02AE5 /* Kingfisher in Frameworks */,
 				33D6FAF32968059200F02AE5 /* SnapKit in Frameworks */,
-				33D6FAF629680ABE00F02AE5 /* ScalingHeaderScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				33D6FA4D2968056400F02AE5 /* Const.swift */,
+				3373C5C429A67A5400E5758A /* APIKey.swift */,
 				33D6FA4E2968056400F02AE5 /* Entities */,
 				33D6FAA72968056400F02AE5 /* Network */,
 				33D6FA492968056400F02AE5 /* plist */,
@@ -517,7 +518,6 @@
 			packageProductDependencies = (
 				33D6FAEF2968058100F02AE5 /* Kingfisher */,
 				33D6FAF22968059200F02AE5 /* SnapKit */,
-				33D6FAF529680ABE00F02AE5 /* ScalingHeaderScrollView */,
 			);
 			productName = NaverWebtoonCloneCoding;
 			productReference = 33D6FA32296804AE00F02AE5 /* NaverWebtoonCloneCoding.app */;
@@ -550,7 +550,6 @@
 			packageReferences = (
 				33D6FAEE2968058100F02AE5 /* XCRemoteSwiftPackageReference "KingFisher" */,
 				33D6FAF12968059200F02AE5 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				33D6FAF429680ABE00F02AE5 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 			);
 			productRefGroup = 33D6FA33296804AE00F02AE5 /* Products */;
 			projectDirPath = "";
@@ -587,6 +586,7 @@
 				33D6FAB62968056400F02AE5 /* DetailViewController.swift in Sources */,
 				33D6FAB52968056400F02AE5 /* AddCollectionViewCellData.swift in Sources */,
 				33D6FAAD2968056400F02AE5 /* Const.swift in Sources */,
+				3373C5C529A67A5400E5758A /* APIKey.swift in Sources */,
 				33F76862296AC92600875E06 /* MyPageViewController.swift in Sources */,
 				33F76860296AC92600875E06 /* MyTableViewHeader.swift in Sources */,
 				33F76863296AC92600875E06 /* MainViewController.swift in Sources */,
@@ -765,6 +765,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -868,14 +869,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		33D6FAF429680ABE00F02AE5 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.6;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -888,11 +881,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33D6FAF12968059200F02AE5 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		33D6FAF529680ABE00F02AE5 /* ScalingHeaderScrollView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33D6FAF429680ABE00F02AE5 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */;
-			productName = ScalingHeaderScrollView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,7 +10,7 @@ import UIKit
 
 struct Const{
     struct Color{
-        static func setColor(color: UIColor) -> UIColor{
+        static func reverseColor(color: UIColor) -> UIColor{
             let r: CGFloat = color.cgColor.components![0], g: CGFloat = color.cgColor.components![1], b: CGFloat = color.cgColor.components![2]
             return UIColor(red: (1 - r), green: (1 - g), blue: (1 - b), alpha: 1)
         }
@@ -92,27 +92,6 @@ struct Const{
             
             return list
         }
-//        static func getDetailDataList() -> [[DetailData]]{
-//            guard let path = Bundle.main.path(forResource: "DetailDataList", ofType: "plist"),
-//                let data = FileManager.default.contents(atPath: path),
-//                  let list = try? PropertyListDecoder().decode([[DetailData]].self, from: data) else {return []}
-//
-//            return list
-//        }
-//        static func getMainContentList() -> [MainContent]{
-//            guard let path = Bundle.main.path(forResource: "MainContent", ofType: "plist"),
-//                let data = FileManager.default.contents(atPath: path),
-//                let list = try? PropertyListDecoder().decode([MainContent].self, from: data) else {return []}
-//                    
-//            return list
-//        }
-//        static func getContentList() -> [Content]{
-//            guard let path = Bundle.main.path(forResource: "Content", ofType: "plist"),
-//                    let data = FileManager.default.contents(atPath: path),
-//                    let list = try? PropertyListDecoder().decode([Content].self, from: data) else {return []}
-//
-//            return list
-//        }
                 
         static func getUserData() -> User!{
             guard let savedData = UserDefaults.standard.object(forKey: "user") as? Foundation.Data else {return nil}
@@ -125,6 +104,7 @@ struct Const{
                 return nil
             }
         }
+        
         static func setUserData(data: User!) {
             do{
                 let encoded = try JSONEncoder().encode(data)

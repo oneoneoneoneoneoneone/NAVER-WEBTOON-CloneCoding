@@ -220,6 +220,7 @@ class DetailViewController: UIViewController{
         
         detailItem = Const.Util.getDetailItemsData(isbn: item!.isbn)
         
+        //처음 선택하는 항목의 테이블뷰셀 데이터는 plist에서 가져옴.
         if detailItem == nil {
             let detailData = Const.Util.getDetailData(day: item!.updateDay).sorted(by: {$1.uploadDate<$0.uploadDate})
             detailItem = DetailItems(isbn: item!.isbn, title: item!.title, detailData: detailData)
@@ -231,38 +232,33 @@ class DetailViewController: UIViewController{
             Const.Util.setItemData(data: item!)
         }
         
+        //미리보기 셀 갯수
         closedCellQuantity = (detailItem?.detailData.filter{$0.uploadDate > Date.now}.count)!
-        
-        let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn})
-        rightLikeButton.setImage(UIImage(systemName: idx == nil ? "plus.circle" : "checkmark.circle.fill"), for: .normal)
-        
-        if idx != nil {
-            self.navigationItem.rightBarButtonItems?.insert(rightAlarmButton, at: 1)
-            if user?.likeItems[idx!].isAlarm ?? true {
-                rightAlarmButton.image = UIImage(systemName: "bell.fill") //bell.slash
-            }
-            else{
-                rightAlarmButton.image = UIImage(systemName: "bell.slash")
-            }
-        }
-        
                 
+        //데이터 채우기
         imageView.kf.setImage(with: URL(string: item!.image))
         backgroundView.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0))
         likeLabel.layer.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0)).cgColor
-        likeLabel.textColor = Const.Color.setColor(color: UIColor(cgColor: likeLabel.layer.backgroundColor!))
+        likeLabel.textColor = Const.Color.reverseColor(color: UIColor(cgColor: likeLabel.layer.backgroundColor!))
         likeLabel.text = "+ 관심 \(Const.Number.setIntToString(number: item!.like))"
         titleLabel.text = item!.title
         authorLabel.text = "\(item!.author)>"
         updateDayLabel.text = " \(item!.updateDay)요웹툰"
         descriptionLabel.text = item!.description
         publisherLabel.text = "#\(item!.publisher)"
+        
+        rightLikeButton.setTitleColor(likeLabel.textColor, for: .normal)
+        navigationController?.navigationBar.tintColor = likeLabel.textColor
+        
+        //관심 표시
+        guard let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn}) else {return}
+        
+        rightLikeButton.setImage(UIImage(systemName: idx == nil ? "plus.circle" : "checkmark.circle.fill"), for: .normal)
+        self.navigationItem.rightBarButtonItems?.insert(rightAlarmButton, at: 1)
+        AlarmButtonChange(idx: idx)
     }
     
     func setNavigation(){
-//        self.navigationController?.isNavigationBarHidden = false
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(systemName: "house"), for: .bottom, barMetrics: .default)
-        
         self.navigationItem.rightBarButtonItems = [rightAlartButton, UIBarButtonItem(customView: rightLikeButton)]
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationController?.navigationBar.backItem?.backBarButtonItem = UIBarButtonItem(title: "")
@@ -270,20 +266,6 @@ class DetailViewController: UIViewController{
 //        rightLikeButton.target = self
         rightAlartButton.target = self
         rightAlarmButton.target = self
-//
-//
-//
-//        var navigationBarAppearance = UINavigationBarAppearance()
-//        navigationBarAppearance.backgroundImage = imageView.image//.backgroundColor = .systemBlue
-//        navigationBarAppearance.backgroundImageContentMode = .scaleAspectFill
-//        navigationController?.navigationBar.clipsToBounds = true
-////
-//        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-//        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
-//        navigationController?.navigationBar.prefersLargeTitles = true
-
-//        navigationController?.navigationBar.layer.zPosition = 3
     }
     
     func setLayout(){
@@ -294,14 +276,14 @@ class DetailViewController: UIViewController{
         }
         
         backgroundView.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(-90)//.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().inset(-92)//.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(180)
         }
         imageView.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(-90)//.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview()//.equalToSuperview().inset(-90)//.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview().inset(40)
-            $0.height.equalTo(240)
+            $0.height.equalTo(180)
         }
         likeLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
@@ -343,7 +325,7 @@ class DetailViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 220)
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 260)
         tableView.tableHeaderView = headerView
         
         tableView.backgroundColor = .systemBackground
@@ -351,12 +333,21 @@ class DetailViewController: UIViewController{
     }
     
     ///
-    func showResultAlert(title: String){
+    private func showResultAlert(title: String){
         let resultAlert = UIAlertController(title: title, message: "\(title)를 선택하였습니다.", preferredStyle: .alert)
         
         resultAlert.addAction(UIAlertAction(title: "확인", style: .cancel))
         
         present(resultAlert, animated:  true)
+    }
+    
+    private func AlarmButtonChange(idx: Int){
+        if user?.likeItems[idx].isAlarm ?? true {
+            rightAlarmButton.image = UIImage(systemName: "bell.fill")
+        }
+        else{
+            rightAlarmButton.image = UIImage(systemName: "bell.slash")
+        }
     }
     
     ///
@@ -373,22 +364,17 @@ class DetailViewController: UIViewController{
     
     //알림 유무
     @objc func rightAlarmButtonTap(){
-        let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn})
-        if user?.likeItems[idx!].isAlarm ?? true {
-            rightAlarmButton.image = UIImage(systemName: "bell.slash")
-            user?.likeItems[idx!].isAlarm = false
-        }
-        else{
-            rightAlarmButton.image = UIImage(systemName: "bell.fill")
-            user?.likeItems[idx!].isAlarm = true
-        }
+        guard let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn}) else {return}
         
+        user?.likeItems[idx].isAlarm = !(user?.likeItems[idx].isAlarm ?? false)
         Const.Util.setUserData(data: user!)
+        
+        AlarmButtonChange(idx: idx)
     }
     
     ///관심 추가
     @objc func addLike(){
-        //my db에 like 작품인지 확인
+        //like 작품인지 확인
         let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn})
         if idx == nil {
             item?.like += 1
@@ -432,7 +418,7 @@ class DetailViewController: UIViewController{
         
         publisherLabel.isHidden = descriptionLabel.numberOfLines == 1
         
-        headerView.frame.size.height = 200 + descriptionLabel.frame.height + (publisherLabel.isHidden ? 0 : 40)
+        headerView.frame.size.height = 240 + descriptionLabel.frame.height + (publisherLabel.isHidden ? 0 : 40)
         tableView.tableHeaderView = headerView
         
     }
