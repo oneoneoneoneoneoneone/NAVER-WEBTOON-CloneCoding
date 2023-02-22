@@ -360,6 +360,8 @@ extension MainViewController{
         dataSource.forEach { model in
             let vc = MainDayPageViewController()
             vc.viewDidLoad()
+            vc.id = user!.id
+            vc.randomTitle = user?.likeItems.randomElement()?.title ?? ""
 
             contents.forEach{ item in
                 if model.title == item.day{
@@ -406,10 +408,16 @@ extension MainViewController{
             let count = dayPages[dayCurrentPage].contents.first?.contentItem.count ?? 0
             
             if count > 0{
-                pageViewHeightConstraint?.constant = CGFloat(3*50 + 215*2 + 130*(count > 3 ? 3 : count) + ((count-1)/3 + 1) * 210)
+                pageViewHeightConstraint?.constant = CGFloat(3*60 + 215*2 + 130*(count > 3 ? 3 : count) + ((count-1)/3 + 1) * 210)
+                
+//                    pageViewHeightConstraint?.constant = CGFloat(
+//                        Const.Size.headerCellHieght*3 +
+//                        Const.Size.aiCellHieght*2 +
+//                        Const.Size.updateCellHieght*a +
+//                        a*Const.Size.basicCellHieght   // ((count-1)/3 + 1)*
             }
             else{
-                pageViewHeightConstraint?.constant = CGFloat(3*50 + 210)
+                pageViewHeightConstraint?.constant = CGFloat(3*60 + 210)
             }
                 
             dayPageViewController.setViewControllers(

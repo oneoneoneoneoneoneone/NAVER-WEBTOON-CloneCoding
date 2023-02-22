@@ -12,8 +12,10 @@ class MainDayPageViewController: UIViewController{
     final var basicCellHieght: CGFloat = 210
     final var aiCellHieght: CGFloat = 215
     final var updateCellHieght: CGFloat = 120
-    final var headerCellHieght: CGFloat = 50
+    final var headerCellHieght: CGFloat = 60
 
+    var id = ""
+    var randomTitle = ""
     var contents: [CalendarContent] = []//mainviewcontr
 
     var collectionView: UICollectionView = {
@@ -254,32 +256,51 @@ extension MainDayPageViewController: UICollectionViewDataSource {
     }
     //헤더뷰 설정
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let defaultAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.label,
+            .font: UIFont.systemFont(ofSize: 16, weight: .regular)
+        ]
+        let boldAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.label,
+            .font: UIFont.systemFont(ofSize: 16, weight: .semibold)
+        ]
+        
         if kind == UICollectionView.elementKindSectionHeader{
-
             switch contents[indexPath.section].sectionType{
             case .update:
                 guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UpdateCollectionViewHeader", for: indexPath) as? UpdateCollectionViewHeader else { fatalError("Error") }
 
-                headerView.titleLabel.text = "@@님님의 취향 저격 웹툰 신작 놓치지 마쇼"
+                let text = NSMutableAttributedString(string: "\(id)님, 이 웹툰들\n최신 이야기를 놓치고 계신 것 같아요!", attributes: defaultAttributes)
+                text.addAttributes(boldAttributes, range: NSRange(location: 0, length: id.count))
+                text.addAttributes(boldAttributes, range: NSRange(location: text.length - 13, length: 13))
+                headerView.titleLabel.attributedText = text
 
                 return headerView
+                
             case .ai:
-
                 guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AiCollectionViewHeader", for: indexPath) as? AiCollectionViewHeader else { fatalError("Error") }
 
                 headerView.iconLabel.text = "Ai"
                 headerView.iconLabel.layer.backgroundColor = UIColor.red.cgColor
-                headerView.titleLabel.text = "@@님님의 취향 저격 웹툰 Ai가 골라주"
+                
+                let text = NSMutableAttributedString(string: "\(id)님의 취향 저격웹툰\nAI가 골라드려요!", attributes: defaultAttributes)
+                text.addAttributes(boldAttributes, range: NSRange(location: 0, length: id.count))
+                headerView.titleLabel.attributedText = text
 
                 return headerView
+                
             case .rank:
                 guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AiCollectionViewHeader", for: indexPath) as? AiCollectionViewHeader else { fatalError("Error") }
 
                 headerView.iconLabel.text = "♡"
                 headerView.iconLabel.layer.backgroundColor = UIColor.green.cgColor
-                headerView.titleLabel.text = "##독자님이 좋아하는 웹툰 랭킹!!!"
+                
+                let text = NSMutableAttributedString(string: "\(randomTitle == "" ? "" : "\(randomTitle)\n")독자님들이 좋아하는 웹툰 랭킹!", attributes: defaultAttributes)
+                text.addAttributes(boldAttributes, range: NSRange(location: 0, length: randomTitle.count))
+                headerView.titleLabel.attributedText = text
 
                 return headerView
+                
             default:
                 let headerView = UICollectionReusableView()
 
