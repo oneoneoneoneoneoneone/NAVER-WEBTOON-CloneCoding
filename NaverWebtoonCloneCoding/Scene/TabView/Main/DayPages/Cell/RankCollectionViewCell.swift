@@ -21,10 +21,8 @@ class RankCollectionViewCell: UICollectionViewCell{
     
     let rankLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
-        label.font = .systemFont(ofSize: 40, weight: .bold)
-        label.text = "1"
-        
+        label.attributedText = NSAttributedString(string: "1")
+
         return label
     }()
     
@@ -46,6 +44,13 @@ class RankCollectionViewCell: UICollectionViewCell{
         
         return label
     }()
+    
+    let strokeTextAttributes: [NSAttributedString.Key : Any] = [
+        .font: UIFont.systemFont(ofSize: 40, weight: .heavy, width: .standard),
+        .foregroundColor : UIColor.label,
+        .strokeColor : UIColor.white,
+        .strokeWidth : -1.5
+    ]
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -81,7 +86,8 @@ class RankCollectionViewCell: UICollectionViewCell{
     
     func setData(item: Item, rank: Int){
         imageView.kf.setImage(with: URL(string: item.image))
-        rankLabel.text = "\(rank)"
+//        rankLabel.text = "\(rank)"
+        rankLabel.attributedText = NSAttributedString(string: "\(rank)", attributes: strokeTextAttributes)
         titleLabel.text = item.title
         descriptionLabel.text = item.description
     }
