@@ -141,7 +141,7 @@ extension MyEditTableViewController {
         accessoryCheckBox.sizeToFit()
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyTableViewCell") as? MyTableViewCell else { return UITableViewCell() }
-        cell.setData(item: Const.Util.getItemData(isbn: user!.likeItems[indexPath.row].isbn))
+        cell.setData(item: Repository.getItemData(isbn: user!.likeItems[indexPath.row].isbn))
         cell.accessoryView = accessoryCheckBox
         cell.backgroundColor = .systemBackground
         

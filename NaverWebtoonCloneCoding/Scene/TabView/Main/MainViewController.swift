@@ -246,12 +246,12 @@ class MainViewController: UIViewController {
 
 extension MainViewController{
     private func login(){
-        user = Const.Util.getUserData()
+        user = Repository.getUserData()
 
         if user == nil {
             user = User(id: "hana", cookieQty: 10, likeItems: [])
 
-            Const.Util.setUserData(data: user)
+            Repository.setUserData(data: user)
         }
     }
 
@@ -328,7 +328,7 @@ extension MainViewController{
     }
     
     private func setData(standard: Int){
-        var items = Const.Util.getItemsData()
+        var items = Repository.getItemsData()
 
         switch standard{
         case 0:

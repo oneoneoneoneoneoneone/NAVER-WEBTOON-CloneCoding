@@ -177,7 +177,7 @@ class BestViewController: UIViewController {
     }
     
     func setData(){
-        items = Const.Util.getItemsData()
+        items = Repository.getItemsData()
 //        days.forEach { day in// for day in 0..<days.count {
 //            var calenderContent: [CalendarContent] = []
 //

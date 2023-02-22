@@ -87,14 +87,14 @@ class TabViewController: UITabBarController {
     }
     
     private func getData(){
-        items = Const.Util.getItemsData()
+        items = Repository.getItemsData()
         
         if items.count == 0 {
             let list = Const.Util.getItemTitleList()
             items = LocalNetwork().getLocation(id: "book", by: list.first!)
 //            getLocation(id: "movie", by: list.last!)
             
-            Const.Util.setItemsData(data: items)
+            Repository.setItemsData(data: items)
         }
     }
 }

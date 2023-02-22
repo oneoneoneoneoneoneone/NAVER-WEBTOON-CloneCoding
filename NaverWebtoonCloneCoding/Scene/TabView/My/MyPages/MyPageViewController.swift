@@ -44,10 +44,10 @@ class MyPageViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        user = Const.Util.getUserData()
+        user = Repository.getUserData()
         items = []
         user?.likeItems.forEach{
-            items.append(Const.Util.getItemData(isbn: $0.isbn))
+            items.append(Repository.getItemData(isbn: $0.isbn))
         }
         
         //업데이트일자 기준 정렬
@@ -77,9 +77,9 @@ class MyPageViewController: UIViewController{
             editItems.append(item!)
         }
 
-        Const.Util.setUserData(data: self.user)
+        Repository.setUserData(data: self.user)
         editItems.forEach{
-            Const.Util.setItemData(data: $0)
+            Repository.setItemData(data: $0)
         }
         
         viewWillAppear(true)
@@ -142,7 +142,7 @@ extension MyPageViewController{
             likeItems[sender.tag].isAlarm = true
         }
         user?.likeItems = likeItems
-        Const.Util.setUserData(data: user)
+        Repository.setUserData(data: user)
         
         tableView.reloadData()
     }   
@@ -177,7 +177,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource{
         accessoryButton.addTarget(self, action: #selector(accessoryButtonTap(sender:)), for: .touchUpInside)
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyTableViewCell") as? MyTableViewCell else { return UITableViewCell() }
-        cell.setData(item: Const.Util.getItemData(isbn: likeItems[indexPath.row].isbn))
+        cell.setData(item: Repository.getItemData(isbn: likeItems[indexPath.row].isbn))
         cell.accessoryView = accessoryButton
         
         return cell

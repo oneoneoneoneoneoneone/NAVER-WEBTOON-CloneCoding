@@ -215,21 +215,21 @@ class DetailViewController: UIViewController{
     }
         
     func setData(){
-        user = Const.Util.getUserData()
-        item = Const.Util.getItemData(isbn: self.isbn!)
+        user = Repository.getUserData()
+        item = Repository.getItemData(isbn: self.isbn!)
         
-        detailItem = Const.Util.getDetailItemsData(isbn: item!.isbn)
+        detailItem = Repository.getDetailItemsData(isbn: item!.isbn)
         
         //처음 선택하는 항목의 테이블뷰셀 데이터는 plist에서 가져옴.
         if detailItem == nil {
-            let detailData = Const.Util.getDetailData(day: item!.updateDay).sorted(by: {$1.uploadDate<$0.uploadDate})
+            let detailData = Repository.getDetailData(day: item!.updateDay).sorted(by: {$1.uploadDate<$0.uploadDate})
             detailItem = DetailItems(isbn: item!.isbn, title: item!.title, detailData: detailData)
             
             let recentUploadDate =  detailData.filter{$0.uploadDate <= Date.now}.first?.uploadDate
             item!.recentUploadDate = recentUploadDate!
             
-            Const.Util.setDetailItemsData(data: detailItem!)
-            Const.Util.setItemData(data: item!)
+            Repository.setDetailItemsData(data: detailItem!)
+            Repository.setItemData(data: item!)
         }
         
         //미리보기 셀 갯수
@@ -367,7 +367,7 @@ class DetailViewController: UIViewController{
         guard let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn}) else {return}
         
         user?.likeItems[idx].isAlarm = !(user?.likeItems[idx].isAlarm ?? false)
-        Const.Util.setUserData(data: user!)
+        Repository.setUserData(data: user!)
         
         AlarmButtonChange(idx: idx)
     }
@@ -396,8 +396,8 @@ class DetailViewController: UIViewController{
             self.navigationItem.rightBarButtonItems?.remove(at: 1)
         }
         
-        Const.Util.setUserData(data: user!)
-        Const.Util.setItemData(data: item!)
+        Repository.setUserData(data: user!)
+        Repository.setItemData(data: item!)
     }
     
     ///작가 검색

@@ -34,7 +34,7 @@ class SearchViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
         //UserDefault 읽기
-        searchLog = Const.Util.getSearchLog()
+        searchLog = Repository.getSearchLog()
     }
 
     
@@ -336,7 +336,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
                 tableView.deleteRows(at: [indexPath], with: .fade) //numberOfRowsInSection을 타서 결국 isEditMode 값 확인함.......
                 tableView.reloadRows(at: self.tableView.indexPathsForVisibleRows ?? [], with: .none)
                 //UserDefaults 변경사항 저장
-                Const.Util.setSearchLog(data: self.searchLog)
+                Repository.setSearchLog(data: self.searchLog)
             }))
                 
             cell.textLabel?.text = searchLog[searchLog.count - indexPath.row - 1]
@@ -422,10 +422,10 @@ extension SearchViewController: UITextFieldDelegate{
         searchLog = searchLog.filter{$0 != textField.text}
         searchLog.append(textField.text ?? "")
         //UserDefaults 변경사항 저장
-        Const.Util.setSearchLog(data: self.searchLog)
+        Repository.setSearchLog(data: self.searchLog)
         
         //검색결과 반영
-        let searchItems = Const.Util.getItemsData().filter{$0.title.contains(textField.text!) || $0.author.contains(textField.text!)}
+        let searchItems = Repository.getItemsData().filter{$0.title.contains(textField.text!) || $0.author.contains(textField.text!)}
         
         bookItems = searchItems.filter{$0.id}
         movieItems = searchItems.filter{!$0.id}

@@ -64,8 +64,8 @@ class EndHeaderView: UIView{//UICollectionReusableView{
     }
     
     func setData(){
-        let user = Const.Util.getUserData()
-        items = Const.Util.getItemsData().suffix(10)//[0...3]
+        let user = Repository.getUserData()
+        items = Repository.getItemsData().suffix(10)//[0...3]
         
         label.text = "\(user!.id)님, 무료 대여권이 생겼어요!"
     }

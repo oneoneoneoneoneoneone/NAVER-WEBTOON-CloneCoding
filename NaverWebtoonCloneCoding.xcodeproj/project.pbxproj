@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3373C5C529A67A5400E5758A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C5C429A67A5400E5758A /* APIKey.swift */; };
+		3373C5C729A6859200E5758A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C5C629A6859200E5758A /* Repository.swift */; };
+		3373C5C929A687BF00E5758A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C5C829A687BF00E5758A /* Item.swift */; };
 		33D6FA36296804AE00F02AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6FA35296804AE00F02AE5 /* AppDelegate.swift */; };
 		33D6FA38296804AE00F02AE5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6FA37296804AE00F02AE5 /* SceneDelegate.swift */; };
 		33D6FA3F296804AF00F02AE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6FA3E296804AF00F02AE5 /* Assets.xcassets */; };
@@ -80,6 +82,8 @@
 
 /* Begin PBXFileReference section */
 		3373C5C429A67A5400E5758A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		3373C5C629A6859200E5758A /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		3373C5C829A687BF00E5758A /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		33D6FA32296804AE00F02AE5 /* NaverWebtoonCloneCoding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaverWebtoonCloneCoding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6FA35296804AE00F02AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33D6FA37296804AE00F02AE5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				33D6FA4D2968056400F02AE5 /* Const.swift */,
+				3373C5C629A6859200E5758A /* Repository.swift */,
 				3373C5C429A67A5400E5758A /* APIKey.swift */,
 				33D6FA4E2968056400F02AE5 /* Entities */,
 				33D6FAA72968056400F02AE5 /* Network */,
@@ -213,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				33D6FA4F2968056400F02AE5 /* User.swift */,
+				3373C5C829A687BF00E5758A /* Item.swift */,
 				33D6FA502968056400F02AE5 /* Content.swift */,
 				33D6FA512968056400F02AE5 /* Bannar.swift */,
 				33D6FA522968056400F02AE5 /* Books.swift */,
@@ -611,6 +617,7 @@
 				33D6FAB72968056400F02AE5 /* ListTableViewCell.swift in Sources */,
 				33D6FAC42968056400F02AE5 /* BestControllerCell.swift in Sources */,
 				33D6FAB22968056400F02AE5 /* Movies.swift in Sources */,
+				3373C5C729A6859200E5758A /* Repository.swift in Sources */,
 				33F7686E296AC92600875E06 /* AiCollectionViewHeader.swift in Sources */,
 				33D6FAC02968056400F02AE5 /* TabViewController.swift in Sources */,
 				33D6FAB02968056400F02AE5 /* Bannar.swift in Sources */,
@@ -625,6 +632,7 @@
 				33F7685C296AC92600875E06 /* AddViewController.swift in Sources */,
 				33F7686D296AC92600875E06 /* AiCollectionViewCell.swift in Sources */,
 				33F76884296DBA3B00875E06 /* WebViewController.swift in Sources */,
+				3373C5C929A687BF00E5758A /* Item.swift in Sources */,
 				33D6FAB92968056400F02AE5 /* FoldTableViewCell.swift in Sources */,
 				33D6FA38296804AE00F02AE5 /* SceneDelegate.swift in Sources */,
 				33F76865296AC92600875E06 /* MainTopPageViewController.swift in Sources */,

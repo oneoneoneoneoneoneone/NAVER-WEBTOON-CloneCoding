@@ -115,7 +115,7 @@ class AddViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        user = Const.Util.getUserData()
+        user = Repository.getUserData()
         
         idLabel.text = user?.id
         cookieQtyLabel.text = "\(user?.cookieQty ?? 0)개"

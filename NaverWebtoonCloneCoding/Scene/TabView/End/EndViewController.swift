@@ -143,7 +143,7 @@ class EndViewController: UIViewController{
     }
     
     private func setData(sort: Int, category: Int){
-        items = Const.Util.getItemsData()
+        items = Repository.getItemsData()
         
         if category != 0{
             items = items.filter{$0.publisher == categoryStandard[currentCategoryStandard]}
