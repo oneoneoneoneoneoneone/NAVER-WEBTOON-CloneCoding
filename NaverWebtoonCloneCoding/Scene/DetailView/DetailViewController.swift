@@ -276,12 +276,12 @@ class DetailViewController: UIViewController{
         }
         
         backgroundView.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(-92)//.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().inset(-92)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(180)
         }
         imageView.snp.makeConstraints{
-            $0.top.equalToSuperview()//.equalToSuperview().inset(-90)//.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaInsets.top)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.height.equalTo(180)
         }
@@ -365,8 +365,9 @@ class DetailViewController: UIViewController{
     //알림 유무
     @objc func rightAlarmButtonTap(){
         guard let idx = user?.likeItems.firstIndex(where: {$0.isbn == item?.isbn}) else {return}
+        let isAlarm = !(user?.likeItems[idx].isAlarm ?? false)
         
-        user?.likeItems[idx].isAlarm = !(user?.likeItems[idx].isAlarm ?? false)
+        user?.likeItems[idx].isAlarm = isAlarm
         Repository.setUserData(data: user!)
         
         AlarmButtonChange(idx: idx)
@@ -510,7 +511,7 @@ extension DetailViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let headerConstant = scrollView.contentOffset.y
 
-        if headerConstant > 90  {
+        if headerConstant > view.safeAreaInsets.top  {
 //            self.navigationController?.navigationBar.backItem?.title = String(titleLabel.text!.dropLast(titleLabel.text!.count > 15 ? titleLabel.text!.count - 15 : 0))
 //            backItem.title = String(titleLabel.text!.dropLast(titleLabel.text!.count > 17 ? titleLabel.text!.count - 17 : 0))
             self.navigationController?.navigationBar.backItem?.backBarButtonItem = UIBarButtonItem(title: titleLabel.text)

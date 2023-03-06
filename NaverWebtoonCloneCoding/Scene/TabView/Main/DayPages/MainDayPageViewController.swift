@@ -81,15 +81,12 @@ class MainDayPageViewController: UIViewController{
 //MARK: Private Method
 extension MainDayPageViewController{
     func setLayout(){
-
         view.addSubview(collectionView)
 
         collectionView.snp.makeConstraints{
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
-
     }
-
 }
 
 
@@ -198,27 +195,18 @@ extension MainDayPageViewController{
 
         return sectionHeader
     }
-
 }
 
 
 //MARK: UICollectionViewDataSource
-extension MainDayPageViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        let detailViewController = DetailViewController()
-        let seletedItem = contents[indexPath.section].contentItem[indexPath.row]
-        detailViewController.isbn = seletedItem.isbn
-        detailViewController.navigationController?.modalPresentationStyle = .fullScreen
-
-        navigationController?.pushViewController(detailViewController, animated: true)
+extension MainDayPageViewController: UICollectionViewDataSource{
+    //@@@@섹션 개수 설정 필수
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return contents.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
             return contents[section].contentItem.count
-
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -249,11 +237,7 @@ extension MainDayPageViewController: UICollectionViewDataSource {
             return cell ?? UICollectionViewCell()
         }
     }
-
-    //@@@@섹션 개수 설정 필수
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return contents.count
-    }
+    
     //헤더뷰 설정
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let defaultAttributes: [NSAttributedString.Key: Any] = [
@@ -315,8 +299,14 @@ extension MainDayPageViewController: UICollectionViewDataSource {
 
 
 //MARK: UICollectionViewDelegateFlowLayout
-
 extension MainDayPageViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        let seletedItem = contents[indexPath.section].contentItem[indexPath.row]
+        detailViewController.isbn = seletedItem.isbn
+        detailViewController.navigationController?.modalPresentationStyle = .fullScreen
 
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
