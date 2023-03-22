@@ -79,7 +79,7 @@
 ### 1. 메인 레이아웃 구성 문제
 
 - 메인 레이아웃을 구성하는 pageViewController에 고정 높이를 설정하게되면 페이지별로 데이터 갯수가 다르기 때문에, 일부 페이지들이 바닥이 잘려보이는 문제가 있었습니다.
-- 현재 선택 된 pageViewController의 viewController가 변경되어 화면에 띄울 때(bind)마다 viewController의 높이에 맞게 pageViewController 높이가 변경되도록 했습니다. 
+  - 현재 선택 된 pageViewController의 viewController가 변경되어 화면에 띄울 때(bind)마다 viewController의 높이에 맞게 pageViewController 높이가 변경되도록 했습니다. 
   <details>
   <summary><b>코드</b></summary>
   <div markdown="1">
@@ -109,7 +109,7 @@
 
 
 - 스크롤을 일정범위까지 내리지 않으면 내려오던 네비게이션바가 다시 위로 숨겨져야하고, 스크롤을 완전히 내렸을 때 요일컬렉션뷰가 네비게이션바 바로 아래에 고정되어야했습니다.
-    - 콜렉션뷰를 스크롤을 할때 호출되는 Delegate 메소드를 사용해 scrollView.contentOffset.y값을 기준으로 콜렉션뷰의 y위치값과 네비게이션바의 y위치값을 조정해 구현했습니다.
+  - 콜렉션뷰를 스크롤을 할때 호출되는 Delegate 메소드를 사용해 scrollView.contentOffset.y값을 기준으로 콜렉션뷰의 y위치값과 네비게이션바의 y위치값을 조정해 구현했습니다.
   <details>
   <summary><b>코드</b></summary>
   <div markdown="1">
@@ -161,7 +161,7 @@
 ### 2. 라벨에 강조속성 주기
 
 - CollectionView의 헤더에 있는 짧은 Label의 닉네임이나 일부분만 볼드체 or 색상을 주어 강조해야했습니다.
-    - 한 줄 짜리 데이터를 여러개의 라벨로 나눠야하는줄 알았으나, NSMutableAttributedString을 적용하여 간단하게 구현했습니다.
+  - 한 줄 짜리 데이터를 여러개의 라벨로 나눠야하는줄 알았으나, NSMutableAttributedString을 적용하여 간단하게 구현했습니다.
   <details>
   <summary><b>코드</b></summary>
   <div markdown="1">
@@ -192,9 +192,9 @@
 ### 3. 서치바의 스코프바 위치 지정
 
 - SearchBar의 scopeBar를 사용했을 때, 취소버튼이 서치바 옆이 아닌 두 객체 사이의 옆에 위치하는 문제가 있었습니다.
-    - 커스텀서치바를 만들어 사용했습니다.
-    - 스코프바에 해당하는 컨트롤은 UISegmentedControl로 구현했습니다.
-    - CustomSearchViewController.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/CustomSearchViewController.swift)
+  - 커스텀서치바를 만들어 사용했습니다.
+  - 스코프바에 해당하는 컨트롤은 UISegmentedControl로 구현했습니다.
+  - CustomSearchViewController.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/CustomSearchViewController.swift)
 
 
 </br>
@@ -203,7 +203,7 @@
 ### 4. 상세화면 버튼 색깔
 
 - 상세화면에서 이미지 위에 위치한 +관심버튼의 색깔을 적용해야하는데 이미지별로 어울리는 색깔을 써야했습니다.
-    - 이미지의 특정 위치의 색깔을 따서 버튼의 색깔을 적용하고, 버튼의 라벨은 그를 반전시킨 값을 적용했습니다.
+  - 이미지의 특정 위치의 색깔을 따서 버튼의 색깔을 적용하고, 버튼의 라벨은 그를 반전시킨 값을 적용했습니다.
   <details>
   <summary><b>코드</b></summary>
   <div markdown="1">
