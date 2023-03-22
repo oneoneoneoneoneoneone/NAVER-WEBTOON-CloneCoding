@@ -189,7 +189,7 @@
 ### 3. 서치바의 스코프바 위치 지정
 
 - SearchBar의 scopeBar를 사용했을 때, 취소버튼이 서치바 옆이 아닌 두 객체 사이의 옆에 위치하는 문제가 있었습니다.
-    - 서치바를 커스텀으로 만들었습니다.
+    - 커스텀서치바를 만들어 사용했습니다.
     - 스코프바에 해당하는 컨트롤은 UISegmentedControl로 구현했습니다.
     - CustomSearchViewController.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/CustomSearchViewController.swift)
 
