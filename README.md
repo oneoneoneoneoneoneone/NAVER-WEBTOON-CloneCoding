@@ -8,7 +8,7 @@
 
 
 ## 기술 스택
-- UIKit / SnapKit
+- UIKit / SnapKit / URLSession / kingfisher
 
 
 </br>
@@ -50,7 +50,7 @@
 - **API 통신** 
   - 서버통신은 URLSession 사용
   - 테스크 내부에서 Response data에 맞춘 Books 구조체로 파싱
-  - LocalNetwork.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Network/LocalNetwork.swift)
+  - LocalNetwork.swift 코드: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Network/LocalNetwork.swift)
 
 
 </br>
@@ -59,7 +59,7 @@
 ### 5. Repository
 
 - **User Defaults** 
-  - Repository.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Util/Repository.swift)
+  - Repository.swift 코드: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Util/Repository.swift)
   
 - 저장하는 데이터 목록입니다.
   - Item - 앱 최초 실행시 저장하는 작품(책) 정보
@@ -194,7 +194,7 @@
 - SearchBar의 scopeBar를 사용했을 때, 취소버튼이 서치바 옆이 아닌 두 객체 사이의 옆에 위치하는 문제가 있었습니다.
   - 커스텀서치바를 만들어 사용했습니다.
   - 스코프바에 해당하는 컨트롤은 UISegmentedControl로 구현했습니다.
-  - CustomSearchViewController.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/CustomSearchViewController.swift)
+  - CustomSearchViewController.swift 코드: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/CustomSearchViewController.swift)
 
 
 </br>
@@ -214,7 +214,7 @@
         likeLabel.layer.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0)).cgColor
       ~~~
 
-      - extension UIImage 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/UIImage.swift)
+      - extension UIImage 코드: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/UIImage.swift)
 
     </div>
     </details>
