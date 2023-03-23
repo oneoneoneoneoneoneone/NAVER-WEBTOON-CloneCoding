@@ -8,8 +8,9 @@
 
 
 ## 기술 스택
-- UIKit / URLSession
-- SnapKit / kingfisher
+- UIKit / SnapKit
+- URLSession
+- kingfisher
 
 
 </br>
