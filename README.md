@@ -80,79 +80,79 @@
 
 - 메인 레이아웃을 구성하는 pageViewController에 고정 높이를 설정하게되면 페이지별로 데이터 갯수가 다르기 때문에, 일부 페이지들이 바닥이 잘려보이는 문제가 있었습니다.
   - 현재 선택 된 pageViewController의 viewController가 변경되어 화면에 띄울 때(bind)마다 viewController의 높이에 맞게 pageViewController 높이가 변경되도록 했습니다. 
-  <details>
-  <summary><b>코드</b></summary>
-  <div markdown="1">
+    <details>
+    <summary><b>코드</b></summary>
+    <div markdown="1">
 
-    ~~~Swift
-    //MainViewController
-      //선언
-      private var pageViewHeightConstraint: NSLayoutConstraint?
+      ~~~Swift
+      //MainViewController
+        //선언
+        private var pageViewHeightConstraint: NSLayoutConstraint?
 
-      //컨트롤 레이아웃 설정
-      private func setLayout(){
-          dayPageViewController.view.snp.makeConstraints{
-              $0.top.equalTo(dayCollectionView.snp.bottom).offset(1)
-              $0.leading.trailing.bottom.equalToSuperview()
-          }
-          pageViewHeightConstraint =    pageViewController.view.heightAnchor.constraint(equalToConstant: 250)
-          pageViewHeightConstraint?.isActive = true
-    }
-      //현재 페이지가 변경될 때 각 컨트롤(페이지뷰, 콜렉션뷰)에 업데이트
-      private func bind(pageViewController: UIPageViewController, oldValue: Int, newValue: Int, animated: Bool){
-          pageViewHeightConstraint?.constant = CGFloat(3*60 + 210)
-    }
-    ~~~
+        //컨트롤 레이아웃 설정
+        private func setLayout(){
+            dayPageViewController.view.snp.makeConstraints{
+                $0.top.equalTo(dayCollectionView.snp.bottom).offset(1)
+                $0.leading.trailing.bottom.equalToSuperview()
+            }
+            pageViewHeightConstraint =    pageViewController.view.heightAnchor.constraint(equalToConstant: 250)
+            pageViewHeightConstraint?.isActive = true
+      }
+        //현재 페이지가 변경될 때 각 컨트롤(페이지뷰, 콜렉션뷰)에 업데이트
+        private func bind(pageViewController: UIPageViewController, oldValue: Int, newValue: Int, animated: Bool){
+            pageViewHeightConstraint?.constant = CGFloat(3*60 + 210)
+      }
+      ~~~
 
-  </div>
-  </details>
+    </div>
+    </details>
 
 
 - 스크롤을 일정범위까지 내리지 않으면 내려오던 네비게이션바가 다시 위로 숨겨져야하고, 스크롤을 완전히 내렸을 때 요일컬렉션뷰가 네비게이션바 바로 아래에 고정되어야했습니다.
   - 콜렉션뷰를 스크롤을 할때 호출되는 Delegate 메소드를 사용해 scrollView.contentOffset.y값을 기준으로 콜렉션뷰의 y위치값과 네비게이션바의 y위치값을 조정해 구현했습니다.
-  <details>
-  <summary><b>코드</b></summary>
-  <div markdown="1">
+    <details>
+    <summary><b>코드</b></summary>
+    <div markdown="1">
 
-    ~~~Swift
-    //MainViewController
-      extension MainViewController: UIScrollViewDelegate{
-          //스크롤이 될 때마다 호출되는 메소드
-          func scrollViewDidScroll(_ scrollView: UIScrollView) {
-              //스크롤 시 상위여백이 없도록 고정
-              if scrollView.contentOffset.y <= 0{
-                  scrollView.contentOffset.y = 0
+      ~~~Swift
+      //MainViewController
+        extension MainViewController: UIScrollViewDelegate{
+            //스크롤이 될 때마다 호출되는 메소드
+            func scrollViewDidScroll(_ scrollView: UIScrollView) {
+                //스크롤 시 상위여백이 없도록 고정
+                if scrollView.contentOffset.y <= 0{
+                    scrollView.contentOffset.y = 0
 
-                  return
-              }
+                    return
+                }
 
-              //스크롤을 일정범위 이상 내렸을 때, dayCollectionView를 네비게이션바 바로 아래에 고정
-              if scrollView.contentOffset.y > 200 - view.safeAreaInsets.top{
-                  dayCollectionView.frame.origin.y = scrollView.contentOffset.y + view.safeAreaInsets.top
+                //스크롤을 일정범위 이상 내렸을 때, dayCollectionView를 네비게이션바 바로 아래에 고정
+                if scrollView.contentOffset.y > 200 - view.safeAreaInsets.top{
+                    dayCollectionView.frame.origin.y = scrollView.contentOffset.y + view.safeAreaInsets.top
 
-                  let nv = self.navigationController as! MainNavigationView
+                    let nv = self.navigationController as! MainNavigationView
 
-                  nv.setNavigationViewHidden(hidden: false)
-              }
-              else{
-                  dayCollectionView.frame.origin.y = 200// - statusBarHeight
+                    nv.setNavigationViewHidden(hidden: false)
+                }
+                else{
+                    dayCollectionView.frame.origin.y = 200// - statusBarHeight
 
-                  let nv = self.navigationController as! MainNavigationView
+                    let nv = self.navigationController as! MainNavigationView
 
-                  nv.setNavigationViewHidden(hidden: true)
-              }
-              //-statusBarMargin) navigationBar를 숨기지 않고 안보이게하는 y 값
-              var headerConstant = scrollView.contentOffset.y - statusBarMargin
+                    nv.setNavigationViewHidden(hidden: true)
+                }
+                //-statusBarMargin) navigationBar를 숨기지 않고 안보이게하는 y 값
+                var headerConstant = scrollView.contentOffset.y - statusBarMargin
 
-              headerConstant = headerConstant > view.safeAreaInsets.top - statusBarMargin ? view.safeAreaInsets.top - statusBarMargin : (headerConstant - Const.Size.HeaderMinHeight)
+                headerConstant = headerConstant > view.safeAreaInsets.top - statusBarMargin ? view.safeAreaInsets.top - statusBarMargin : (headerConstant - Const.Size.HeaderMinHeight)
 
-              self.navigationController?.navigationBar.layer.position.y = headerConstant// < -15 ? -22 : headerConstant
-          }
-      }
-    ~~~
+                self.navigationController?.navigationBar.layer.position.y = headerConstant// < -15 ? -22 : headerConstant
+            }
+        }
+      ~~~
 
-  </div>
-  </details>
+    </div>
+    </details>
 
 
 </br>
@@ -162,28 +162,28 @@
 
 - CollectionView의 헤더에 있는 짧은 Label의 닉네임이나 일부분만 볼드체 or 색상을 주어 강조해야했습니다.
   - 한 줄 짜리 데이터를 여러개의 라벨로 나눠야하는줄 알았으나, NSMutableAttributedString을 적용하여 간단하게 구현했습니다.
-  <details>
-  <summary><b>코드</b></summary>
-  <div markdown="1">
+    <details>
+    <summary><b>코드</b></summary>
+    <div markdown="1">
 
-    ~~~Swift
-    //MainDayPageViewController
-      let defaultAttributes: [NSAttributedString.Key: Any] = [
-              .foregroundColor: UIColor.label,
-              .font: UIFont.systemFont(ofSize: 16, weight: .regular)
-          ]
-          let boldAttributes: [NSAttributedString.Key: Any] = [
-              .foregroundColor: UIColor.label,
-              .font: UIFont.systemFont(ofSize: 16, weight: .semibold)
-          ]
+      ~~~Swift
+      //MainDayPageViewController
+        let defaultAttributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.systemFont(ofSize: 16, weight: .regular)
+            ]
+            let boldAttributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.systemFont(ofSize: 16, weight: .semibold)
+            ]
 
-      let text = NSMutableAttributedString(string: "\(id)님, 이 웹툰들\n최신 이야기를 놓치고 계신 것 같아요!", attributes: defaultAttributes)
-      text.addAttributes(boldAttributes, range: NSRange(location: 0, length: id.count))
-      text.addAttributes(boldAttributes, range: NSRange(location: text.length - 13,
-    ~~~
+        let text = NSMutableAttributedString(string: "\(id)님, 이 웹툰들\n최신 이야기를 놓치고 계신 것 같아요!", attributes: defaultAttributes)
+        text.addAttributes(boldAttributes, range: NSRange(location: 0, length: id.count))
+        text.addAttributes(boldAttributes, range: NSRange(location: text.length - 13,
+      ~~~
 
-  </div>
-  </details>
+    </div>
+    </details>
 
 
 </br>
@@ -204,20 +204,20 @@
 
 - 상세화면에서 이미지 위에 위치한 +관심버튼의 색깔을 적용해야하는데 이미지별로 어울리는 색깔을 써야했습니다.
   - 이미지의 특정 위치의 색깔을 따서 버튼의 색깔을 적용하고, 버튼의 라벨은 그를 반전시킨 값을 적용했습니다.
-  <details>
-  <summary><b>코드</b></summary>
-  <div markdown="1">
-    
-    ~~~Swift
-    //DetailViewController
-      backgroundView.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0))
-      likeLabel.layer.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0)).cgColor
-    ~~~
+    <details>
+    <summary><b>코드</b></summary>
+    <div markdown="1">
 
-    - extension UIImage 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/UIImage.swift)
+      ~~~Swift
+      //DetailViewController
+        backgroundView.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0))
+        likeLabel.layer.backgroundColor = imageView.image?.getPixelColor(pos: CGPoint(x: 0, y: 0)).cgColor
+      ~~~
 
-  </div>
-  </details>
+      - extension UIImage 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Scene/CustomUI/UIImage.swift)
+
+    </div>
+    </details>
   
   
 </br>
